@@ -1,104 +1,29 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { StarWarsContext } from "../context/StarWarsContext";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/header/header";
 
 const LandingPage = () => {
-  const {
-    starships,
-    currentPage,
-    totalPages,
-    isLoading,
-    error,
-    setCurrentPage,
-  } = useContext(StarWarsContext);
-
-  const observer = useRef();
-
-  const lastStarshipElementRef = useRef();
-
-  useEffect(() => {
-    if (observer.current) observer.current.disconnect();
-
-    observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && currentPage < totalPages) {
-        setTimeout(() => {
-          setCurrentPage((prevPage) => prevPage + 1);
-        }, 1000);
-      }
-    });
-
-    if (lastStarshipElementRef.current) {
-      observer.current.observe(lastStarshipElementRef.current);
-    }
-  }, [isLoading, currentPage, totalPages]);
-
-  if (isLoading && currentPage === 1) return <p>Loading...</p>;
-  if (error) return <p>Error loading starships: {error.message}</p>;
+  const navigate = useNavigate();
 
   return (
     <>
-      <header>
-        <nav className="border-gray-200 px-4 py-2.5 dark:bg-gray-800">
-          <div className="flex justify-between items-center mx-auto max-w-screen-xl">
-            <div className="flex items-center w-auto">
-              <div className="w-20"></div>
-            </div>
-            <div className="flex items-center w-auto">
-              <div className="w-20"></div>
-            </div>
-            <div className="flex items-center w-auto">
-              <div className="w-10"></div>
-            </div>
-
-            <div className="flex-grow flex items-center justify-center">
-              <div className="h-12 w-auto lg:h-24 lg:w-auto">
-                <img
-                  src="/logo.png"
-                  alt="headline_img"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center">
-              <a
-                href="#"
-                className="text-white font-medium rounded-lg text-md px-4 lg:px-5 py-2 lg:py-2.5 mr-2"
-              >
-                LOG IN
-              </a>
-              <a
-                href="#"
-                className="text-white font-medium rounded-lg text-md px-4 lg:px-5 py-2 lg:py-2.5 mr-2"
-              >
-                SIGN UP
-              </a>
-            </div>
+      <Header />
+      <div className="relative">
+        <div className="relative z-10 flex h-screen flex-col justify-center">
+          <div className="flex flex-col items-center text-center">
+            <p className="text-4xl">Welcome 2 star war!</p>
+            <p className="text-md mt-1">Lorem oopsum</p>
           </div>
-        </nav>
-      </header>
-
-      <div>
-        {starships.map(({ name, model, url }, index) => {
-          const starshipId = url.split("/").filter(Boolean).pop();
-          return (
-            <Link
-              to={`/starship/${starshipId}`}
-              key={url}
-              ref={
-                index === starships.length - 1 ? lastStarshipElementRef : null
-              }
+          <div className="mt-6 flex justify-center">
+            <button
+              className="rounded border bg-gray-900 px-12 py-3 text-xl font-semibold text-white hover:border-green-500 hover:border-transparent hover:bg-white hover:text-green-700"
+              onClick={() => navigate("/main")}
             >
-              <div className="border-gray-100 border rounded-lg my-8 mx-10 px-4 py-4 bg-gray-900">
-                <p>{name}</p>
-                <p>{model}</p>
-              </div>
-            </Link>
-          );
-        })}
+              List of Ships
+            </button>
+          </div>
+        </div>
       </div>
-
-      {isLoading && currentPage > 1 && <p>Loading more ships...</p>}
     </>
   );
 };
