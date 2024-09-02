@@ -17,6 +17,6 @@ export const exampleData = [
   },
   {
     title: "MILLENIUM FALCON",
-    model: "YT-1300 light freighter",
+    model: "YT-1400 light freighter",
   },
 ];
