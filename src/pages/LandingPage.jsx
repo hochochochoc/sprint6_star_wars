@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/header/header";
+import Header from "../components/header/Header";
+import SubHeader from "../components/sub-header/subHeader";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -8,6 +9,7 @@ const LandingPage = () => {
   return (
     <>
       <Header />
+      <SubHeader />
       <div className="relative">
         <div className="relative z-10 flex h-screen flex-col justify-center">
           <div className="flex flex-col items-center text-center">

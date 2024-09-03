@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/main" element={<MainPage />} />
-        <Route element={<ProtectedRoute canActivate={true} />}>
+        <Route element={<ProtectedRoute />}>
           <Route path="/starship/:id" element={<Ship />} />
         </Route>
         <Route path="/login" element={<Login />} />
