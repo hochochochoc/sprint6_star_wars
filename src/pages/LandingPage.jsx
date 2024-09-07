@@ -13,8 +13,8 @@ const LandingPage = () => {
       <div className="relative">
         <div className="relative z-10 flex h-screen flex-col justify-center">
           <div className="flex flex-col items-center text-center">
-            <p className="text-4xl">Welcome 2 star war!</p>
-            <p className="text-md mt-1">Lorem oopsum</p>
+            <p className="text-4xl">Welcome to Star Wars!</p>
+            <p className="text-md mt-1">Lorem ipsum etc</p>
           </div>
           <div className="mt-6 flex justify-center">
             <button
